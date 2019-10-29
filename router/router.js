@@ -1,13 +1,13 @@
 const express = require('express');
 const router=express.Router();
 
-//const VideojuegoController= require("../core/controllers/Videojuegos.controller");
+const usuarioController= require("../core/controllers/usuario.controller");
 
 //router.get("/getVideojuego", VideojuegoController.getVideojuego);
 
 //router.get("/getVideojuegoID/:id", VideojuegoController.getVideojuegoID);
 
-//router.post("/videojuego", VideojuegoController.save);
+router.post("/usuario/login", usuarioController.login);
 
 //router.put("/updateVideojuego/:id", VideojuegoController.putVideojuego);
 
