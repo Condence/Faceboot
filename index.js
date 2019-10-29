@@ -9,3 +9,16 @@ const middlewares = require("./middleware/middlewares");
 
 //SETTINGS
 app.set("port", process.env.PORT || 3000);
+
+//MIDDLEWARES
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(middlewares.tokenMiddlewares);
+
+//ROUTES
+app.use("/",require("./router/router"));
+
+//STAR SERVER
+app.listen(app.get("port"), () => {
+    loger.info(`Server running at ${app.get("port")}`);
+})
