@@ -1,6 +1,7 @@
 const moongose = require("mongoose");
 const Schema = mongoose.Schema
 const ObjectId= moongose.Types.ObjectId;
+const generosEnum= require("../enums/generosEnum.enum")
 
 
 
@@ -23,17 +24,14 @@ const UsuarioSchema = new Schema({
       sexo:{type:String,required:true},
       fechaNacimiento:{type:String, required:true},      
       genero:{type: String, required:true, 
-        maxlenght:50,enum: generoEnum.getALL()},
+        maxlenght:50,enum: generosEnum.getALL()},
 
-        Musica:{type:[{
-            genero:{type:String,required:true}       
-            }]
-            },
+        
         postsPublicados:{type:[{
-            genero:{type:String,required:true},
-            posteadoFecha:{},
-            creatAt:{},
-            refencia:{}       
+           
+            posteadoFecha:{type:Date.now(),required:true},
+            creatAt:{timestamps: true},
+            refencia:{type:ObjectId,ref:"Posts"}       
             }]
       }
     });

@@ -1,13 +1,19 @@
 module.exports={
-    getC(){return"C"},
-    getE(){return"E"},
-    getE10(){return"E10"},
-    getT(){return"T"},
-    getM(){return"M"},
-    getCA(){return"A"},
-    getRP(){return"RP"},
+    getBlues(){return"Blues"},
+    getCorrido(){return"Corrido"},
+    getCountry(){return"Country"},
+    getCumbia(){return"Cumbia"},
+    getElectronica(){return"Electronica"},
+    getMetal(){return"Metal"},
+    getRock(){return"Rock"},
+    getPop(){return"Pop"},
+    getReggaeton(){return"Reggaeton"},
+    getRap(){return"Rap"},
+
+
     getAll(){
-        return[this.C,this.E,this.E10,this.T,this.M,this.A,this.RP];
+        return[this.getBlues,this.getCorrido,this.getCountry,this.getCumbia,
+            this.getElectronica,this.getMetal,this.getPop,this.getRap,this.getReggaeton,this.getRock];
     }
     
     }
