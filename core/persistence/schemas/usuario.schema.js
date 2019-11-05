@@ -29,7 +29,7 @@ const UsuarioSchema = new Schema({
         
         postsPublicados:{type:[{
            
-            posteadoFecha:{type:Date.now(),required:true},
+            posteadoFecha:{type:Date,required:true},
             creatAt:{timestamps: true},
             refencia:{type:ObjectId,ref:"Posts"}       
             }]
