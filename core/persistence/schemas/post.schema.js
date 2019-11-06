@@ -1,31 +1,17 @@
-// POSTS
-// - uid
-// - isPublic (boolean publico privado)
-// - Mensaje
-// - Tags
-// - Status  (  Boolean Posts borrado/bloqueado/eliminado )
-// - Comentarios
-//     // - Usuario
-//     - Fecha
-
-const moongose = require("mongoose");
-const Schema = mongoose.Schema
-const ObjectId= moongose.Types.ObjectId;
-const statusEnum= require("../enums/statusEnum")
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema; 
+//const generosEnum = require("../enums/generosEnum");
+const ObjectId = mongoose.Types.ObjectId;
+const uniqueValidator = require('mongoose-unique-validator');
 
 const PostSchema = new Schema({
-    uid:{type:ObjectId},
-    isPublic:{type:Boolean,required:true},
-    tags:{type:String},
-    status:{type:String, enum:statusEnum.getAll},
+    content:{type:String, required:true, maxlenght:150}, 
+    public:{type: Boolean, default:true},
+    postedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Usuario'
+    }
+}, { timestamps: true });  
 
-   
-    comentarios:{type:[{
-           
-        comentadoFecha:{type:Date,required:true},
-        //esto me hace ruido
-        usuario:{type:ObjectId,ref:"usuarios"}       
-        }]
-  }      
-      
-  });
+module.exports = mongoose.model("Posts", PostSchema, "posts");
+
