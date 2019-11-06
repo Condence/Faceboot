@@ -3,12 +3,12 @@ const router=express.Router();
 
 const usuarioController= require("../core/controllers/usuario.controller");
 
-//router.get("/getVideojuego", VideojuegoController.getVideojuego);
+router.post("/api/user", usuarioController.postUsuario);
+router.get("/api/users", usuarioController.getUsuarios);
+router.get("/api/user/:idUsuario", usuarioController.getUsuario);
+router.put("/api/user/:idUsuario", usuarioController.putUsuario);
+router.delete("/api/user/:idUsuario", usuarioController.deleteUsuario);
 
-//router.get("/getVideojuegoID/:id", VideojuegoController.getVideojuegoID);
-
-router.post("/usuario/login", usuarioController.login);
-
-//router.put("/updateVideojuego/:id", VideojuegoController.putVideojuego);
+//router.post("/usuario/login", usuarioController.login);
 
 module.exports = router;

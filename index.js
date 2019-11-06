@@ -13,7 +13,7 @@ app.set("port", process.env.PORT || 3000);
 //MIDDLEWARES
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(middlewares.tokenMiddlewares);
+//app.use(middlewares.tokenMiddlewares);
 
 //ROUTES
 app.use("/",require("./router/router"));
