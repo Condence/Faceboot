@@ -7,5 +7,9 @@ module.exports = {
         user: 'root',
         password: '',
         database: 'Faceboot'
+    },
+    auth: {
+        secret: 'p1nch1p4l4br4s3cr3t4alv',
+        rounds: 10
     }
 };

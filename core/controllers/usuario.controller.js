@@ -1,4 +1,6 @@
 const usuarioDAO = require("../persistence/dao/usuario.dao");
+const config = require("../../config");
+var bcrypt = require('bcrypt'); 
 
 module.exports = {
     getUsuarios(req, res) {        
@@ -21,7 +23,10 @@ module.exports = {
         });        
     },
     postUsuario(req, res){
-        let usuario = req.body;
+        let usuario = req.body;  
+        var salt = bcrypt.genSaltSync(config.auth.rounds);
+        var hash = bcrypt.hashSync(usuario.password, salt);
+        usuario.password = hash;
         usuarioDAO.postUsuario(usuario).then((result)=>{
             res.status(200).json(result);
         }).catch((error)=>{

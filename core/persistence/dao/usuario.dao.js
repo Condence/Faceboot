@@ -22,8 +22,8 @@ module.exports.getUsuario = function(idUsuario) {
         });
     });
 } 
-module.exports.postUsuario = function(usuario){
-    return new Promise((resolve, reject)=>{
+module.exports.postUsuario = function(usuario){ 
+    return new Promise((resolve, reject)=>{ 
         const usuarioAGuardar = new usuarioModel(usuario);
         usuarioAGuardar.save((error, result)=>{
             if(error){
@@ -33,7 +33,7 @@ module.exports.postUsuario = function(usuario){
             }
         });
     });
-} 
+}
 module.exports.putUsuario = function(idUsuario, usuario){ 
     return new Promise((resolve, reject)=>{ 
         usuarioModel.findByIdAndUpdate(idUsuario,{$set: usuario},{new: true}, (error, result)=>{

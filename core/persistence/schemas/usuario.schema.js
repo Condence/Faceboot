@@ -7,6 +7,7 @@ const uniqueValidator = require('mongoose-unique-validator');
  
 const UsuarioSchema = new Schema({
     nombre:{type:String, required:true, maxlenght:50},
+    password:{type:String, required:true, maxlenght:150},
     correo:{type:String, required:true, maxlenght:50, unique: true},
     edad:{type:Number, required:true, min:0},
     sexo:{type:String,required:true},
