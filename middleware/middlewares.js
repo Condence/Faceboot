@@ -2,6 +2,7 @@ const tokens = require("./tokens");
 
 exports.tokenMiddleware = function(req, res, next){
     let token = req.headers["x-access-token"]; 
+    
     if(token){
             tokens.validateToken(token).then(result=>{ 
                 next();

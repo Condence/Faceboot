@@ -5,6 +5,7 @@ const ObjectId = mongoose.Types.ObjectId;
 const uniqueValidator = require('mongoose-unique-validator');
 
 const PostSchema = new Schema({
+    activo:{type: Boolean, default:true},
     content:{type:String, required:true, maxlenght:150}, 
     public:{type: Boolean, default:true},
     postedBy: {

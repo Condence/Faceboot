@@ -25,6 +25,17 @@ module.exports.getPosts = function(){
         });
     });
 } 
+module.exports.getPostsID = function(postid){ 
+    return new Promise((resolve, reject) => {  
+        postModel.findById(postid, (error, result)=>{
+            if(error){
+                reject("Trono: " + error);
+            }else{
+                resolve(result);
+            }
+        });
+    });
+} 
 module.exports.getPostsUser = function(idUsuario){
     return new Promise((resolve, reject) => {
         postModel.find({postedBy: idUsuario,public:true}, (error, result)=>{
@@ -45,5 +56,27 @@ module.exports.getPostsFind = function(tags){
                 resolve(result);
             }
         });
+    });
+} 
+module.exports.deletePost = function(postid) {   
+    return new Promise((resolve, reject) => {
+        postModel.findById(postid, (error, result)=>{
+            if(error){
+                reject("Trono: " + error);
+            }else{ 
+                if(result.postedBy == respuesta.id){
+                    postModel.findByIdAndUpdate(postid,{activo: false}, (error, result)=>{ 
+                        if(error){
+                            reject("Trono: " + error);
+                        }else{
+                            resolve(result);
+                        }
+                    });
+                } else {
+                    reject("Trono: " + error);
+                } 
+            }
+        });
+         
     });
 } 
