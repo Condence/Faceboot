@@ -36,15 +36,25 @@ module.exports.getPostsID = function(postid){
         });
     });
 } 
-module.exports.getPostsUser = function(idUsuario){
-    return new Promise((resolve, reject) => {
-        postModel.find({postedBy: idUsuario,public:true}, (error, result)=>{
-            if(error){
-                reject("Trono: " + error);
-            }else{
-                resolve(result);
-            }
-        });
+module.exports.getPostsUser = function(idUsuario){   
+    return new Promise((resolve, reject) => { 
+        if(respuesta.id == idUsuario){
+            postModel.find({postedBy: idUsuario,activo:true}, (error, result)=>{
+                if(error){
+                    reject("Trono: " + error);
+                }else{
+                    resolve(result);
+                }
+            });
+        } else {
+            postModel.find({postedBy: idUsuario,public:true, activo: true}, (error, result)=>{
+                if(error){
+                    reject("Trono: " + error);
+                }else{
+                    resolve(result);
+                }
+            });
+        } 
     });
 } 
 module.exports.getPostsFind = function(tags){
