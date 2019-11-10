@@ -16,7 +16,7 @@ module.exports.postPost = function(post){
 }
 module.exports.getPosts = function(){ 
     return new Promise((resolve, reject) => {  
-        postModel.find({}, (error, result)=>{
+        postModel.find({public:true}, (error, result)=>{
             if(error){
                 reject("Trono: " + error);
             }else{
@@ -76,7 +76,6 @@ module.exports.deletePost = function(postid) {
                     reject("Trono: " + error);
                 } 
             }
-        });
-         
+        });  
     });
 } 

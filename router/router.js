@@ -5,6 +5,7 @@ const usuarioController= require("../core/controllers/usuario.controller");
 const AuthController= require("../core/controllers/Auth.controller");
 const postController = require("../core/controllers/post.controller");
 const conocidoController = require("../core/controllers/conocido.controller");
+const comentarioController = require("../core/controllers/comentario.controller");
 const middlewares = require("../middleware/middlewares");
 
 // AUTH
@@ -28,7 +29,8 @@ router.get("/api/posts", middlewares.tokenMiddleware, postController.getPosts);
 router.get("/api/posts/:idUsuario", postController.getPostsUser);
 router.delete("/api/post/:postid", middlewares.tokenMiddleware, postController.deletePost); 
 
-
+//Comentarios 
+router.post("/api/comment/:postid", comentarioController.postComment);
 
 /** 
     router.post("/api/user", usuarioController.postUsuario);
