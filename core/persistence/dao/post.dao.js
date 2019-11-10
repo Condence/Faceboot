@@ -31,7 +31,11 @@ module.exports.getPostsID = function(postid){
             if(error){
                 reject("Trono: " + error);
             }else{
-                resolve(result);
+                if(result.public){
+                    resolve(result);
+                } else {
+                    reject("Trono: post privado: " + error);
+                }
             }
         });
     });
