@@ -33,6 +33,6 @@ connection_mysql.connect((err) => {
     if (err) {
         throw err;
     } 
-    logger.info('Connected to database mysq');
+    logger.info('Connected to database mysql');
 });
 global.connection_mysql = connection_mysql;
