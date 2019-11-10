@@ -10,6 +10,10 @@ const ComentarioSchema = new Schema({
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario'
+    },
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Posts'
     }
 }, { timestamps: true });  
 

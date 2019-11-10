@@ -27,11 +27,11 @@ module.exports.postComment = function(post, postid){
 }
 module.exports.deleteComment = function(commentid,postid) {   
     return new Promise((resolve, reject) => {
-        postModel.findById(postid, (error, result)=>{
+        comentarioModel.findById(commentid, (error, result)=>{
             if(error){
                 reject("Trono: " + error);
             }else{  
-                if(result.postedBy == respuesta.id){
+                if((result) && (result.postedBy == respuesta.id)){
                     comentarioModel.findByIdAndUpdate(commentid,{activo: false}, (error, result)=>{ 
                         if(error){
                             reject("Trono: " + error);
@@ -40,7 +40,7 @@ module.exports.deleteComment = function(commentid,postid) {
                         }
                     });
                 } else {
-                    
+                    reject("Trono: " + error);
                 } 
             }
         });  
