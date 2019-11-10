@@ -74,6 +74,7 @@ module.exports.getPostsFind = function(tags){
 } 
 module.exports.deletePost = function(postid) {   
     return new Promise((resolve, reject) => {
+        
         postModel.findById(postid, (error, result)=>{
             if(error){
                 reject("Trono: " + error);

@@ -34,25 +34,33 @@ module.exports.postUsuario = function(usuario){
         });
     });
 }
-module.exports.putUsuario = function(idUsuario, usuario){ 
+module.exports.putUsuario = function(idUsuario, usuario){  
     return new Promise((resolve, reject)=>{ 
-        usuarioModel.findByIdAndUpdate(idUsuario,{$set: usuario},{new: true}, (error, result)=>{
-            if(error){
-                reject("Trono: " + error);
-            }else{
-                resolve(result);
-            }
-        });
+        if(idUsuario == respuesta.id){
+            usuarioModel.findByIdAndUpdate(idUsuario,{$set: usuario},{new: true}, (error, result)=>{
+                if(error){
+                    reject("Trono: " + error);
+                }else{
+                    resolve(result);
+                }
+            });
+        } else { 
+            reject("Solo puedes actualizar tu usuario.");
+        } 
     });
 }
 module.exports.deleteUsuario = function(idUsuario) {  
     return new Promise((resolve, reject) => {
-        usuarioModel.findByIdAndUpdate(idUsuario,{activo: false}, (error, result)=>{ 
-            if(error){
-                reject("Trono: " + error);
-            }else{
-                resolve(result);
-            }
-        });
+        if(idUsuario == respuesta.id){
+            usuarioModel.findByIdAndUpdate(idUsuario,{activo: false}, (error, result)=>{ 
+                if(error){
+                    reject("Trono: " + error);
+                }else{
+                    resolve(result);
+                }
+            });
+        } else { 
+            reject("Solo puedes borrar tu usuario.");
+        } 
     });
 } 

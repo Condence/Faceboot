@@ -11,5 +11,8 @@ module.exports = {
     auth: {
         secret: 'p1nch1p4l4br4s3cr3t4alv',
         rounds: 10
+    },
+    api: {
+        version: 'v1'
     }
 };

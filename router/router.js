@@ -8,18 +8,20 @@ const conocidoController = require("../core/controllers/conocido.controller");
 const comentarioController = require("../core/controllers/comentario.controller");
 const middlewares = require("../middleware/middlewares");
 
-// AUTH
-router.post("/api/login", AuthController.login);
+const config = require("../config"); 
 
-// USUARIOS
-router.post("/api/user", usuarioController.postUsuario); 
-router.get("/api/user/:idUsuario", middlewares.tokenMiddleware, usuarioController.getUsuario);
-router.put("/api/user/:idUsuario", middlewares.tokenMiddleware, usuarioController.putUsuario);
-router.delete("/api/user/:idUsuario", middlewares.tokenMiddleware, usuarioController.deleteUsuario); 
-router.get("/api/users", middlewares.tokenMiddleware, usuarioController.getUsuarios); 
+// AUTH
+router.post("/api/login", AuthController.login); // Publico
+
+// User
+router.post(`/api/${config.api.version}/user`, usuarioController.postUsuario);  // Publico
+router.get(`/api/${config.api.version}/user/:idUsuario`, middlewares.tokenMiddleware, usuarioController.getUsuario); // Privado
+router.put(`/api/${config.api.version}/user/:idUsuario"`, middlewares.tokenMiddleware, usuarioController.putUsuario); // Privado
+router.delete(`/api/${config.api.version}/user/:idUsuario`, middlewares.tokenMiddleware, usuarioController.deleteUsuario); // Privado
+router.get(`/api/${config.api.version}/users`, middlewares.tokenMiddleware, usuarioController.getUsuarios); // Privado
 
 // CONOCIDOS
-router.post("/api/conocido/:idUsuario", conocidoController.postConocido);
+router.post(`/api/${config.api.version}/conocido/:idUsuario`, middlewares.tokenMiddleware, conocidoController.postConocido); // Privado
 
 // POSTS
 router.post("/api/post", middlewares.tokenMiddleware, postController.postPost);

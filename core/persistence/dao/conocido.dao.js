@@ -22,7 +22,11 @@ module.exports.postConocido = function(idUsuario, conocidoid){
                             }
                         });  
                     } else {
-                        reject("Trono: Usuario ya existe o eres tu" + error);
+                        if(respuesta.id == conocidoid){
+                            reject("Error no puedes agregarte como conocido.");
+                        } else {
+                            reject("Error el usuario ya es tu conocido.");
+                        } 
                     } 
                 }  
             }

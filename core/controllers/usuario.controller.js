@@ -35,7 +35,7 @@ module.exports = {
     },
     putUsuario(req, res){
         let usuario = req.body;
-        let idUsuario = req.params.idUsuario;
+        let idUsuario = req.params.idUsuario; 
         usuarioDAO.putUsuario(idUsuario, usuario).then((result)=>{
             res.status(200).json(result);
         }).catch((error)=>{
