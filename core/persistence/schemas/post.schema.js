@@ -10,7 +10,8 @@ const PostSchema = new Schema({
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario'
-    }
+    },
+    tags: [String]
 }, { timestamps: true });  
 
 module.exports = mongoose.model("Posts", PostSchema, "posts");

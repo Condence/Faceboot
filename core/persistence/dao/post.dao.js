@@ -2,7 +2,7 @@ const postModel = require("../schemas/post.schema");
 
 module.exports.postPost = function(post){ 
     return new Promise((resolve, reject)=>{ 
-        const postAGuardar = new postModel(post);
+        const postAGuardar = new postModel(post); 
         postAGuardar.save((error, result)=>{
             if(error){
                 reject("Trono: " + error);
@@ -26,6 +26,17 @@ module.exports.getPosts = function(){
 module.exports.getPostsUser = function(idUsuario){
     return new Promise((resolve, reject) => {
         postModel.find({postedBy: idUsuario,public:true}, (error, result)=>{
+            if(error){
+                reject("Trono: " + error);
+            }else{
+                resolve(result);
+            }
+        });
+    });
+} 
+module.exports.getPostsFind = function(tags){
+    return new Promise((resolve, reject) => {
+        postModel.find({ tags: { $in: [tags] }, public:true}, (error, result)=>{
             if(error){
                 reject("Trono: " + error);
             }else{

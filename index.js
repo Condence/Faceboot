@@ -12,8 +12,6 @@ app.set("port", process.env.PORT || 3000);
 //MIDDLEWARES
 app.use(morgan("dev"));
 app.use(express.json());
- 
-//app.use(middlewares.tokenMiddlewares);
 
 //ROUTES
 app.use("/",require("./router/router"));
@@ -22,16 +20,3 @@ app.use("/",require("./router/router"));
 app.listen(app.get("port"), () => {
     loger.info(`Server running at ${app.get("port")}`);
 })
-const token = tokensMiddleware.generateToken({
-    _id: "234234234234",
-    name: "David Emanuel"
-});
-console.log(token);
-const token2 = "243242ssasas352hjhgr353eeeeef52";
-try {
-    const tokenDecoded = tokensMiddleware.validateToken(token); 
-    console.log(tokenDecoded);
-} catch (err) {
-    console.error(err);
-}
- 

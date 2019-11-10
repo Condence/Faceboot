@@ -22,5 +22,5 @@ const UsuarioSchema = new Schema({
 }, { timestamps: true });  
 
 
-//UsuarioSchema.plugin(uniqueValidator, { message: 'ya se encuentra registrado' });
+UsuarioSchema.plugin(uniqueValidator, { message: 'ya se encuentra registrado' });
 module.exports = mongoose.model("Usuario", UsuarioSchema, "usuario");

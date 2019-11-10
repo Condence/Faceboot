@@ -2,7 +2,7 @@ const conocidoDAO = require("../persistence/dao/conocido.dao");
 
 module.exports = {
     postConocido(req, res){
-        let conocido = req.body;    
+        let conocido = req.body.conocido;    
         let idUsuario = req.params.idUsuario;
         conocidoDAO.postConocido(idUsuario,conocido).then((result)=>{
             res.status(200).json(result);

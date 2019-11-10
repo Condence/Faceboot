@@ -7,20 +7,27 @@ const postController = require("../core/controllers/post.controller");
 const conocidoController = require("../core/controllers/conocido.controller");
 const middlewares = require("../middleware/middlewares");
 
-router.post("/api/login", AuthController.authenticate);
+// AUTH
+router.post("/api/login", AuthController.login);
 
-router.post("/api/user", usuarioController.postUsuario);
-router.get("/api/users", usuarioController.getUsuarios);
-router.get("/api/user/:idUsuario", usuarioController.getUsuario);
-router.put("/api/user/:idUsuario", usuarioController.putUsuario);
-router.delete("/api/user/:idUsuario", usuarioController.deleteUsuario);
+// USUARIOS
+router.post("/api/user", usuarioController.postUsuario); 
+router.get("/api/user/:idUsuario", usuarioController.getUsuario)
+router.put("/api/user/:idUsuario", usuarioController.putUsuario)
+router.delete("/api/user/:idUsuario", usuarioController.deleteUsuario); 
+router.get("/api/users", usuarioController.getUsuarios); 
 
-
+// CONOCIDOS
 router.post("/api/conocido/:idUsuario", conocidoController.postConocido);
 
+// POSTS
 router.post("/api/post", postController.postPost);
-router.get("/api/posts", postController.getPosts);
+router.get("/api/posts/tags/:tag", postController.getPostsFind);
+router.get("/api/posts", middlewares.tokenMiddleware, postController.getPosts);
 router.get("/api/posts/:idUsuario", postController.getPostsUser);
+
+
+
 /** 
     router.post("/api/user", usuarioController.postUsuario);
     router.get("/api/users",middlewares.tokenMiddlewares, usuarioController.getUsuarios);

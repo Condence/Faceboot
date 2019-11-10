@@ -1,22 +1,12 @@
-const jwt = require("jsonwebtoken");
-const scretPhrase = "1ts0nW3bTok3N";
+const jwt = require("jsonwebtoken"); 
+const config = require("../config");
+const secretPhrase = "f4c3b0oTw3Bt0k3n";
 
 exports.generateToken = function(user){
-    return jwt.sign(user, scretPhrase, {expiresIn: "5m"})
+    return jwt.sign(user, secretPhrase,{expiresIn: "20m" });
 }
-
-exports.validateToken = async function(token){
-    const decoded = jwt.verify(token, scretPhrase);
-    return decoded;
-    /**
-    return new Promise((resolve, reject) => {
-        jwt.verify(token, scretPhrase, (err, decode)=>{
-            if(err){
-                reject(`Token validation error`);
-            } else {
-                resolve();
-            }
-        });
-    });
-    */
+ 
+exports.validateToken = async function(token) {
+    const respuesta = await jwt.verify(token, secretPhrase);
+    return respuesta; 
 }
