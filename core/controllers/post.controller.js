@@ -11,7 +11,7 @@ module.exports = {
             res.status(500).json(error);
         });        
     },
-    getPosts(req, res) {        
+    getPosts(req, res) {    
         try{
             postDAO.getPosts().then((result)=>{
                 res.status(200).json(result);

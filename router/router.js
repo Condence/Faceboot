@@ -21,7 +21,7 @@ router.get("/api/users", usuarioController.getUsuarios);
 router.post("/api/conocido/:idUsuario", conocidoController.postConocido);
 
 // POSTS
-router.post("/api/post", postController.postPost);
+router.post("/api/post", middlewares.tokenMiddleware, postController.postPost);
 router.get("/api/posts/tags/:tag", postController.getPostsFind);
 router.get("/api/posts", middlewares.tokenMiddleware, postController.getPosts);
 router.get("/api/posts/:idUsuario", postController.getPostsUser);

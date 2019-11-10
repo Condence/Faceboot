@@ -1,8 +1,10 @@
 const postModel = require("../schemas/post.schema");
+const tokenM = require("../../../middleware/middlewares");
 
 module.exports.postPost = function(post){ 
     return new Promise((resolve, reject)=>{ 
-        const postAGuardar = new postModel(post); 
+        const postAGuardar = new postModel(post);  
+        console.log(tokenM.id);
         postAGuardar.save((error, result)=>{
             if(error){
                 reject("Trono: " + error);
@@ -12,8 +14,8 @@ module.exports.postPost = function(post){
         });
     });
 }
-module.exports.getPosts = function(){
-    return new Promise((resolve, reject) => {
+module.exports.getPosts = function(){ 
+    return new Promise((resolve, reject) => {  
         postModel.find({}, (error, result)=>{
             if(error){
                 reject("Trono: " + error);

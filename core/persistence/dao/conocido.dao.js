@@ -1,40 +1,31 @@
 const usuarioModel = require("../schemas/usuario.schema");
 module.exports.postConocido = function(idUsuario, conocidoid){
     return new Promise((resolve, reject) => {
-        usuarioModel.find({_id: idUsuario, 'conocidos._id': conocidoid}, (error, result)=>{
+        let agregar = true;
+        usuarioModel.find({'_id': idUsuario}, (error, result)=>{
             if(error){
                 reject("Trono: " + error);
             }else{ 
-                usuarioModel.findByIdAndUpdate(idUsuario, {$push: {conocidos: conocidoid}}, (error, result)=>{
-                    if(error){
-                        reject("Trono: " + error);
-                    }else{
-                        resolve(result);
-                    }
-                }); 
-                
+                if(result){   
+                    for (let index = 0; index < result[0].conocidos.length; index++) {  
+                        if(result[0].conocidos[index] == conocidoid){  
+                            agregar =  false;
+                            break; 
+                        }  
+                    } 
+                    if((agregar) && (conocidoid != idUsuario)){
+                        usuarioModel.findByIdAndUpdate(idUsuario, {$push: {conocidos: conocidoid}}, (error, result2)=>{
+                            if(error){
+                                reject("Trono: " + error);
+                            }else{
+                                resolve(result2);
+                            }
+                        });  
+                    } else {
+                        reject("Trono: Usuario ya existe o eres tu" + error);
+                    } 
+                }  
             }
         });
-    });
-    /**
-    console.log("Dwd");
-    var query = {'_id':idUsuario};
-    return new Promise((resolve, reject)=>{
-        usuarioModel.findOneAndUpdate(query, {$push: {conocidos: conocidoid}}, {upsert:true}),function(error, result){
-            if(error){
-                reject("Trono: " + error);
-            }else{
-                resolve(result);
-                 
-                usuarioModel.findByIdAndUpdate(idUsuario, {$push: {conocidos: conocidoid}}, (error, result)=>{
-                    if(error){
-                        reject("Trono: " + error);
-                    }else{
-                        resolve(result);
-                    }
-                });  
-            }
-        } 
-    });
-    */
+    }); 
 } 
