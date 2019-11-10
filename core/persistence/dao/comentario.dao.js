@@ -30,7 +30,7 @@ module.exports.deleteComment = function(commentid,postid) {
         comentarioModel.findById(commentid, (error, result)=>{
             if(error){
                 reject("Trono: " + error);
-            }else{  
+            }else{   
                 if((result) && (result.postedBy == respuesta.id)){
                     comentarioModel.findByIdAndUpdate(commentid,{activo: false}, (error, result)=>{ 
                         if(error){
@@ -40,7 +40,7 @@ module.exports.deleteComment = function(commentid,postid) {
                         }
                     });
                 } else {
-                    reject("Trono: " + error);
+                    reject("Tienes que ser dueño del comentario para eliminarlo.");
                 } 
             }
         });  

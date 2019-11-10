@@ -11,7 +11,7 @@ const middlewares = require("../middleware/middlewares");
 const config = require("../config"); 
 
 // AUTH
-router.post("/api/login", AuthController.login); // Publico
+router.post(`/api/${config.api.version}/login`, AuthController.login); // Publico
 
 // User
 router.post(`/api/${config.api.version}/user`, usuarioController.postUsuario);  // Publico
@@ -24,15 +24,15 @@ router.get(`/api/${config.api.version}/users`, middlewares.tokenMiddleware, usua
 router.post(`/api/${config.api.version}/conocido/:idUsuario`, middlewares.tokenMiddleware, conocidoController.postConocido); // Privado
 
 // POSTS
-router.post("/api/post", middlewares.tokenMiddleware, postController.postPost);
-router.get("/api/posts/tags/:tag", middlewares.tokenMiddleware, postController.getPostsFind);
-router.get("/api/post/:postid", middlewares.tokenMiddleware, postController.getPostsID);
-router.get("/api/posts", middlewares.tokenMiddleware, postController.getPosts);
-router.get("/api/posts/:idUsuario", middlewares.tokenMiddleware, postController.getPostsUser);
-router.delete("/api/post/:postid", middlewares.tokenMiddleware, postController.deletePost); 
+router.post(`/api/${config.api.version}/post`, middlewares.tokenMiddleware, postController.postPost); // Privado
+router.get(`/api/${config.api.version}/posts/tags/:tag`, middlewares.tokenMiddleware, postController.getPostsFind); // Privado
+router.get(`/api/${config.api.version}/post/:postid`, postController.getPostsID); // Publico
+router.get(`/api/${config.api.version}/posts`, middlewares.tokenMiddleware, postController.getPosts); // Privado
+router.get(`/api/${config.api.version}/posts/:idUsuario`, middlewares.tokenMiddleware, postController.getPostsUser); // Privado
+router.delete(`/api/${config.api.version}/post/:postid`, middlewares.tokenMiddleware, postController.deletePost); // Privado
 
 //Comentarios 
-router.post("/api/comment/:postid", middlewares.tokenMiddleware, comentarioController.postComment); 
-router.delete("/api/comment/:commentid", middlewares.tokenMiddleware, comentarioController.deleteComment); 
+router.post(`/api/${config.api.version}/comment/:postid`, middlewares.tokenMiddleware, comentarioController.postComment);   // Privado
+router.delete(`/api/${config.api.version}/comment/:commentid`, middlewares.tokenMiddleware, comentarioController.deleteComment);  // Privado
 
 module.exports = router;

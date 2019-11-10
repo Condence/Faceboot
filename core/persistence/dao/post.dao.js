@@ -3,8 +3,8 @@ const tokenM = require("../../../middleware/middlewares");
 
 module.exports.postPost = function(post){ 
     return new Promise((resolve, reject)=>{ 
-        const postAGuardar = new postModel(post);  
-        console.log(tokenM.id);
+        const postAGuardar = new postModel(post);    
+        postAGuardar.postedBy = respuesta.id; 
         postAGuardar.save((error, result)=>{
             if(error){
                 reject("Trono: " + error);
@@ -28,15 +28,20 @@ module.exports.getPosts = function(){
 module.exports.getPostsID = function(postid){ 
     return new Promise((resolve, reject) => {  
         postModel.findById(postid, (error, result)=>{
-            if(error){
-                reject("Trono: " + error);
-            }else{
-                if(result.public){
-                    resolve(result);
-                } else {
-                    reject("Trono: post privado: " + error);
+            if(result.activo){
+                if(error){
+                    reject("Trono: " + error);
+                }else{
+                    if(result.public){
+                        resolve(result);
+                    } else {
+                        reject("Trono: post privado: " + error);
+                    }
                 }
+            } else {
+                reject("No se encontro el post");
             }
+             
         });
     });
 } 
@@ -73,22 +78,23 @@ module.exports.getPostsFind = function(tags){
     });
 } 
 module.exports.deletePost = function(postid) {   
-    return new Promise((resolve, reject) => {
-        
+    return new Promise((resolve, reject) => { 
         postModel.findById(postid, (error, result)=>{
             if(error){
                 reject("Trono: " + error);
             }else{ 
+                console.log(result.postedBy);
+                console.log(respuesta.id);
                 if(result.postedBy == respuesta.id){
                     postModel.findByIdAndUpdate(postid,{activo: false}, (error, result)=>{ 
                         if(error){
                             reject("Trono: " + error);
                         }else{
-                            resolve(result);
+                            resolve("Post eliminado");
                         }
                     });
                 } else {
-                    reject("Trono: " + error);
+                    reject("Error tienes que ser dueño del post.");
                 } 
             }
         });  

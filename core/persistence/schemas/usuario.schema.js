@@ -14,7 +14,10 @@ const UsuarioSchema = new Schema({
     fechaNacimiento:{type:String, required:true},      
     genero:{type: String, required:true, maxlenght:50},
     activo:{type: Boolean, default:true},
-    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+    posts: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: 'Posts' 
+    }],
     conocidos: [{ 
         type: Schema.Types.ObjectId, 
         ref: 'Usuario'
