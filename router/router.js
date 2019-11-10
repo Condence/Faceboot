@@ -30,15 +30,7 @@ router.get("/api/posts/:idUsuario", postController.getPostsUser);
 router.delete("/api/post/:postid", middlewares.tokenMiddleware, postController.deletePost); 
 
 //Comentarios 
-router.post("/api/comment/:postid", comentarioController.postComment);
-
-/** 
-    router.post("/api/user", usuarioController.postUsuario);
-    router.get("/api/users",middlewares.tokenMiddlewares, usuarioController.getUsuarios);
-    router.get("/api/user/:idUsuario",middlewares.tokenMiddlewares, usuarioController.getUsuario);
-    router.put("/api/user/:idUsuario", middlewares.tokenMiddlewares, usuarioController.putUsuario);
-    router.delete("/api/user/:idUsuario", middlewares.tokenMiddlewares, usuarioController.deleteUsuario); 
-*/
-//router.post("/usuario/login", usuarioController.login);
+router.post("/api/comment/:postid", comentarioController.postComment); 
+ 
 
 module.exports = router;
