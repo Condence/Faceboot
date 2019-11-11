@@ -31,16 +31,34 @@ module.exports.deleteComment = function(commentid,postid) {
             if(error){
                 reject("Trono: " + error);
             }else{   
+                console.log(result.post);
+                console.log(respuesta.id);
                 if((result) && (result.postedBy == respuesta.id)){
                     comentarioModel.findByIdAndUpdate(commentid,{activo: false}, (error, result)=>{ 
                         if(error){
                             reject("Trono: " + error);
-                        }else{
+                        }else{ 
                             resolve(result);
                         }
                     });
-                } else {
-                    reject("Tienes que ser dueño del comentario para eliminarlo.");
+                } else { 
+                    postModel.findById(postid, (error, result2)=>{
+                        if(error){
+                            reject("Trono: " + error); 
+                        }else {
+                            if(result2.postedBy == respuesta.id){
+                                comentarioModel.findByIdAndUpdate(commentid,{activo: false}, (error, result3)=>{ 
+                                    if(error){
+                                        reject("Trono: " + error);
+                                    }else{ 
+                                        resolve(result3);
+                                    }
+                                });
+                            } else {
+                                reject("Tienes que ser dueño del comentario o del post para eliminarlo.");
+                            }
+                        }
+                    });   
                 } 
             }
         });  
