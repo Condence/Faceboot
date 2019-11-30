@@ -14,6 +14,7 @@ const UsuarioSchema = new Schema({
     fechaNacimiento:{type:String, required:true},      
     genero:{type: String, required:true, maxlenght:50},
     activo:{type: Boolean, default:true},
+    rol:{type: String},
     posts: [{ 
         type: Schema.Types.ObjectId, 
         ref: 'Posts' 

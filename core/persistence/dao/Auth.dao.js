@@ -12,9 +12,15 @@ module.exports.login = function(body_correo, body_password){
             }else{ 
                 if(result){
                     if(result.password == body_password){   
-                         const user = {id: result.id};
-                         const token = tokens.generateToken(user); 
-                        resolve(token);
+                        const user = {id: result.id};
+                        const roles = {id: result.rol};
+                        const token = tokens.generateToken(user, roles, body_correo); 
+                        resolve({
+                            data:{
+                                correo: body_correo,
+                                token: token
+                            }
+                        });
                     } else { 
                         reject("Trono: contraseña erronea " + error);
                     } 

@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken"); 
 const config = require("../config"); 
  
-exports.generateToken = function(user){
-    return jwt.sign(user, config.auth.secret,{expiresIn: "20m" });
+exports.generateToken = function(user,rol,email){
+    return jwt.sign({_id:user, rol:rol, correo: email}, config.auth.secret,{expiresIn: "20m" });
 }
  
 exports.validateToken = async function(token) { 
